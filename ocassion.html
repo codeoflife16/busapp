@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Occasion Booking</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input {
+            width: 200px;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #duration { /* Style for the duration display */
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Occasion Bus Booking</h1>
+
+    <label for="busType">Bus Type:</label>
+    <select id="busType">
+        <option value="small">Small Bus</option>
+        <option value="volvo">Volvo</option>
+        <option value="sleeper">Sleeper</option>
+    </select>
+
+    <label for="location">Location:</label>
+    <select id="location">
+        <option value="kolkata">Inside Kolkata</option>
+        <option value="outside">Outside Kolkata</option>
+    </select>
+
+    <label for="days">Number of Days:</label>
+    <input type="number" id="days" min="1" value="1">
+
+    <button onclick="calculatePrice()">Calculate Price</button>
+
+    <div id="result"></div>
+    <div id="duration"></div> <div id="duration"></div>
+
+    <script>
+        function calculatePrice() {
+            const busType = document.getElementById("busType").value;
+            const location = document.getElementById("location").value;
+            const days = parseInt(document.getElementById("days").value); // Parse days as an integer
+            let price = 0;
+
+            switch (busType) {
+                case "small":
+                    price = 5000;
+                    break;
+                case "volvo":
+                    price = 20000;
+                    break;
+                case "sleeper":
+                    price = 50000;
+                    break;
+            }
+
+            if (location === "outside") {
+                const multiplier = Math.random() * 1 + 1.5;
+                price = Math.round(price * multiplier);
+            }
+
+            price = price * days; // Multiply by the number of days
+
+            document.getElementById("result").textContent = "Total Price: ₹" + price;
+            document.getElementById("duration").textContent = "Total Days: " + days; // Display the number of days
+        }
+    </script>
+</body>
+</html>
